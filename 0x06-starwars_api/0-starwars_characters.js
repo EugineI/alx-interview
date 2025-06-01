@@ -1,5 +1,4 @@
 #!/usr/bin/node
-
 const request = require('request');
 
 const movieId = process.argv[2];
@@ -22,10 +21,10 @@ function fetchJson (url) {
 async function printCharacters () {
   try {
     const film = await fetchJson(apiUrl);
-    const characters = film.characters;
+    const characterUrls = film.characters;
 
-    for (const url of characters) {
-      const character = await fetchJson(url);
+    for (let i = 0; i < characterUrls.length; i++) {
+      const character = await fetchJson(characterUrls[i]);
       console.log(character.name);
     }
   } catch (error) {
